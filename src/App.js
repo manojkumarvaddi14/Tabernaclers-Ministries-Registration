@@ -2,15 +2,15 @@ import { useState } from 'react';
 import './App.css';
 
 // === IMPORTANT: REPLACE THESE WITH YOUR GOOGLE FORM VALUES ===
-const GOOGLE_FORM_ACTION_URL = "https://docs.google.com/spreadsheets/d/1o3ScHdOo3nDQ6bdO0QP2Sx9izIu8lhXCnPP1VSSGnuI/"; // e.g., https://docs.google.com/forms/d/e/1FAIpQLScz.../formResponse
+const GOOGLE_FORM_ACTION_URL = "https://docs.google.com/forms/d/1umZW3z3z9k9l6GltP6Z_tLHivmOOAweNSzHPsvPWsX0/"; // e.g., https://docs.google.com/forms/d/e/1FAIpQLScz.../formResponse
 
 // Map your form fields to the Google Form's entry IDs
 const FIELD_IDS = {
-    NAME: "entry.123456789",          // Replace with your Name ID
-    PHONE: "entry.987654321",         // Replace with your Phone ID
-    LOCATION: "entry.112233445",      // Replace with your Location ID
-    INVITED_THROUGH: "entry.556677889",// Replace with your Invited Through ID
-    REFERENCED_BY: "entry.990011223",  // Replace with your Referenced By ID
+    NAME: "entry.2112083089",          // Replace with your Name ID
+    PHONE: "entry.191136437",         // Replace with your Phone ID
+    LOCATION: "entry.398155023",      // Replace with your Location ID
+    INVITED_THROUGH: "entry.1465180738",// Replace with your Invited Through ID
+    REFERENCED_BY: "entry.511397093",  // Replace with your Referenced By ID
 };
 // =============================================================
 
