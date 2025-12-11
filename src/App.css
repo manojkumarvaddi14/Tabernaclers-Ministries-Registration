@@ -1,38 +1,218 @@
-.App {
-  text-align: center;
+/* General Reset and Base Styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+:root {
+    --primary-color: #ff0000; /* YouTube Red */
+    --secondary-color: #25d366; /* WhatsApp Green */
+    --tertiary-color: #c13584; /* Instagram Purple/Pink */
+    --background-form: rgba(255, 255, 255, 0.95);
+    --text-color: #333;
+    --border-radius: 8px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* App Container for Background Image */
+.app-container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* Optional: Makes background static */
+    padding: 20px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+/* Form Wrapper - Centers and contains the form content */
+.form-wrapper {
+    width: 100%;
+    max-width: 500px;
+    background: var(--background-form);
+    border-radius: var(--border-radius);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    padding: 30px;
 }
 
-.App-link {
-  color: #61dafb;
+/* Header Styles */
+.header {
+    text-align: center;
+    margin-bottom: 25px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.header h1 {
+    color: var(--primary-color);
+    margin-bottom: 5px;
+}
+
+.header p {
+    color: var(--text-color);
+}
+
+/* Form Styling */
+.register-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: var(--text-color);
+}
+
+.form-group input[type="text"], 
+.form-group input[type="tel"], 
+.form-group textarea {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: var(--border-radius);
+    font-size: 16px;
+    width: 100%;
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus, 
+.form-group textarea:focus {
+    border-color: var(--primary-color);
+    outline: none;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+/* Radio Button Group */
+.radio-group {
+    display: flex;
+    flex-wrap: wrap; /* Allows wrapping on smaller screens */
+    gap: 15px;
+    padding: 10px 0;
+}
+
+.radio-group label {
+    display: flex;
+    align-items: center;
+    font-weight: normal;
+    cursor: pointer;
+}
+
+.radio-group input[type="radio"] {
+    margin-right: 5px;
+    accent-color: var(--primary-color);
+}
+
+/* Submit Button */
+.submit-button {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 15px;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.1s;
+    margin-top: 10px;
+}
+
+.submit-button:hover {
+    background-color: #cc0000;
+}
+
+.submit-button:active {
+    transform: scale(0.99);
+}
+
+/* Message Display */
+.message {
+    text-align: center;
+    padding: 10px;
+    color: green;
+    font-weight: bold;
+}
+
+/* Social Links */
+.social-links {
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+    text-align: center;
+}
+
+.social-links h2 {
+    margin-bottom: 15px;
+    color: var(--text-color);
+}
+
+.social-button {
+    display: block; /* Make buttons stack on mobile */
+    text-decoration: none;
+    color: white;
+    padding: 10px 15px;
+    border-radius: var(--border-radius);
+    margin: 10px 0;
+    font-weight: bold;
+    transition: opacity 0.3s;
+}
+
+/* Specific Social Button Colors */
+.youtube-btn {
+    background-color: var(--primary-color);
+}
+
+.whatsapp-btn {
+    background-color: var(--secondary-color);
+}
+
+.instagram-btn {
+    background-color: var(--tertiary-color);
+}
+
+.social-button:hover {
+    opacity: 0.85;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+    font-size: 14px;
+    color: #666;
+}
+
+/* --- Media Queries for Responsiveness --- */
+@media (min-width: 600px) {
+    .form-wrapper {
+        padding: 40px;
+    }
+    
+    .social-links {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .social-button {
+        display: inline-block; /* Make buttons inline on larger screens */
+        flex-grow: 1;
+        margin: 0;
+    }
+
+    .radio-group {
+        justify-content: space-between;
+    }
 }
