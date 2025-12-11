@@ -123,7 +123,7 @@ const RegistrationForm = ({
 
                 {/* Referenced By (Source) */}
                 <div className="form-group">
-                    <label>Referenced By (Source):</label>
+                    <label>Invited By:</label>
                     <div className="radio-group">
                         {referenceOptions.map(option => (
                             <label key={option}>
@@ -255,7 +255,7 @@ const App = () => {
                 </div>
                 
                 {/* --- FOOTER CONTENT --- */}
-                <SocialLinks />
+                
                 <footer>
                     <p>&copy; 2025 George Sambathini</p>
                 </footer>
