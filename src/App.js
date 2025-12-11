@@ -76,7 +76,7 @@ const App = () => {
             });
 
             // If fetch succeeds, we assume data was sent (due to 'no-cors')
-            setMessage('Registration successful! Data saved to Google Sheet.');
+            setMessage('Registration Successfully!');
             setFormData({ // Reset form
                 name: '', phone: '', location: '', invitedThrough: 'Instagram', referencedBy: '', referenceText: '',
             });
@@ -91,7 +91,7 @@ const App = () => {
         <div className="app-container" style={{ backgroundImage: `url(${BACKGROUND_IMAGE_URL})` }}>
             <div className="form-wrapper">
                 <header className="header">
-                    <h1>Register & Subscribe</h1>
+                    <h1>Register Now</h1>
                     <p>Join our community and get the latest updates!</p>
                 </header>
                 
@@ -157,7 +157,7 @@ const App = () => {
                         )}
                     </div>
                     
-                    <button type="submit" className="submit-button">Submit & Subscribe</button>
+                    <button type="submit" className="submit-button">Submit</button>
                     {message && <p className="message">{message}</p>}
                 </form>
 
