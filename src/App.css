@@ -1,218 +1,348 @@
-/* General Reset and Base Styles */
-* {
-    box-sizing: border-box;
+/* Custom CSS Variables */
+:root {
+    --primary-color: #0066cc;        /* Deep Professional Blue */
+    --secondary-color: #25D366;      /* WhatsApp Green */
+    --youtube-red: #FF0000;
+    --instagram-pink: #E1306C;
+    --background-overlay: rgba(18, 18, 18, 0.55); /* Darker overlay for image contrast */
+    --text-color: #1f1f1f;           /* Near black for high contrast text */
+    --light-text-color: #4a4a4a;
+    /* --- TRANSPARENCY CONTROL --- */
+    --card-background: rgba(255, 255, 255, 0.9); /* White with 10% transparency */
+    /* ----------------------------- */
+    --border-color: #dcdcdc;
+    --shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Clean, modern shadow */
+    --transition-speed: 0.3s;
+    --font-stack: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+/* Base and Typography Refinement */
+html, body {
     margin: 0;
     padding: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: var(--font-stack);
+    color: var(--text-color);
+    line-height: 1.5;
 }
 
-:root {
-    --primary-color: #ff0000; /* YouTube Red */
-    --secondary-color: #25d366; /* WhatsApp Green */
-    --tertiary-color: #c13584; /* Instagram Purple/Pink */
-    --background-form: rgba(255, 255, 255, 0.95);
-    --text-color: #333;
-    --border-radius: 8px;
-}
-
-/* App Container for Background Image */
+/* Background Setup (Cover and Overlay) */
 .app-container {
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-size: cover;
+    padding: 40px 20px; 
+    box-sizing: border-box;
+
+    /* --- BACKGROUND COVER FIX --- */
+    background-size: cover; /* Ensures image covers the entire viewport */
     background-position: center;
-    background-attachment: fixed; /* Optional: Makes background static */
-    padding: 20px;
+    background-repeat: no-repeat; 
+    background-attachment: fixed;
+    /* -------------------------- */
+    
+    background-color: #111; 
+    position: relative;
+    overflow: hidden; 
 }
 
-/* Form Wrapper - Centers and contains the form content */
+/* Dark Overlay */
+.app-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--background-overlay);
+    z-index: 0;
+}
+
+/* Form Wrapper (Transparent Card Container) */
 .form-wrapper {
+    background-color: var(--card-background); 
+    padding: 35px; 
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    max-width: 480px; 
     width: 100%;
-    max-width: 500px;
-    background: var(--background-form);
-    border-radius: var(--border-radius);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-    padding: 30px;
+    z-index: 10;
+    box-sizing: border-box;
+    
+    /* ENHANCED ANIMATION: Fade In and Scale Up */
+    animation: fadeInScale 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
 }
 
-/* Header Styles */
-.header {
-    text-align: center;
-    margin-bottom: 25px;
-}
-
+/* Header Styling */
 .header h1 {
     color: var(--primary-color);
+    margin-top: 0;
     margin-bottom: 5px;
+    font-size: 2em; 
+    font-weight: 700;
 }
 
 .header p {
-    color: var(--text-color);
+    color: var(--light-text-color);
+    margin-bottom: 25px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 15px; 
+    font-size: 1.05em;
 }
 
-/* Form Styling */
-.register-form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
+/* Form Groups */
 .form-group {
-    display: flex;
-    flex-direction: column;
+    margin-bottom: 22px; 
 }
 
 .form-group label {
-    margin-bottom: 5px;
-    font-weight: bold;
+    display: block;
+    margin-bottom: 8px; 
+    font-weight: 600; 
     color: var(--text-color);
+    font-size: 0.95em;
 }
 
-.form-group input[type="text"], 
-.form-group input[type="tel"], 
-.form-group textarea {
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: var(--border-radius);
-    font-size: 16px;
+.form-group input[type="text"],
+.form-group input[type="tel"] {
     width: 100%;
-    transition: border-color 0.3s;
+    padding: 14px; 
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    box-sizing: border-box;
+    transition: border-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+    font-size: 1em;
 }
 
-.form-group input:focus, 
-.form-group textarea:focus {
+/* Input Focus Feedback */
+.form-group input:focus {
     border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.15); 
     outline: none;
 }
 
-.form-group textarea {
-    resize: vertical;
-    min-height: 80px;
-}
-
-/* Radio Button Group */
+/* Radio Group Styling */
 .radio-group {
     display: flex;
-    flex-wrap: wrap; /* Allows wrapping on smaller screens */
-    gap: 15px;
-    padding: 10px 0;
+    flex-wrap: wrap;
+    gap: 20px; 
+    margin-top: 5px;
 }
 
 .radio-group label {
+    font-weight: 400; 
     display: flex;
     align-items: center;
-    font-weight: normal;
     cursor: pointer;
+    color: var(--light-text-color);
 }
 
 .radio-group input[type="radio"] {
-    margin-right: 5px;
-    accent-color: var(--primary-color);
+    margin-right: 8px;
+    transform: scale(1.0);
+    transition: transform 0.2s ease;
 }
 
-/* Submit Button */
+.radio-group input[type="radio"]:checked {
+    transform: scale(1.25); 
+}
+
+/* Buttons */
 .submit-button {
+    width: 100%;
+    padding: 14px;
     background-color: var(--primary-color);
     color: white;
-    padding: 15px;
     border: none;
-    border-radius: var(--border-radius);
+    border-radius: 6px;
+    font-size: 1.1em;
+    font-weight: 600;
     cursor: pointer;
-    font-size: 18px;
-    font-weight: bold;
-    transition: background-color 0.3s, transform 0.1s;
-    margin-top: 10px;
+    margin-top: 25px; 
+    transition: background-color var(--transition-speed) ease, transform 0.2s ease, box-shadow var(--transition-speed) ease;
 }
 
 .submit-button:hover {
-    background-color: #cc0000;
+    background-color: #004d99; 
+    transform: translateY(-2px); 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-.submit-button:active {
-    transform: scale(0.99);
-}
-
-/* Message Display */
+/* Submission Message */
 .message {
     text-align: center;
-    padding: 10px;
-    color: green;
-    font-weight: bold;
+    margin-top: 20px;
+    color: #cc0000;
+    font-weight: 600;
 }
 
-/* Social Links */
+/* Social Links Section */
 .social-links {
-    margin-top: 25px;
-    padding-top: 20px;
-    border-top: 1px solid #eee;
+    margin-top: 35px;
+    padding-top: 25px;
+    border-top: 1px solid var(--border-color);
     text-align: center;
 }
 
 .social-links h2 {
-    margin-bottom: 15px;
-    color: var(--text-color);
+    font-size: 1.4em;
+    color: var(--light-text-color);
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+/* --- LOGO STYLING OVERRIDES --- */
+
+/* Parent container for horizontal arrangement */
+.social-icon-group {
+    display: flex;
+    justify-content: center;
+    gap: 15px; /* Spacing between logos */
+    margin-bottom: 20px; /* Space below the logos */
+    flex-wrap: wrap;
 }
 
 .social-button {
-    display: block; /* Make buttons stack on mobile */
-    text-decoration: none;
+    /* Set fixed size for the logo button */
+    display: inline-flex; 
+    justify-content: center;
+    align-items: center;
+    width: 60px; 
+    height: 60px;
+    
+    border-radius: 50%; /* Make them circular */
+    
     color: white;
-    padding: 10px 15px;
-    border-radius: var(--border-radius);
-    margin: 10px 0;
+    text-decoration: none;
+    font-weight: 600;
+    transition: opacity var(--transition-speed) ease, transform 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    font-size: 1.8em; /* Size of the icon text/character */
+}
+
+/* Logo Pseudo-element Content (Using Unicode Characters as Logos) */
+.social-button::before {
+    content: ''; 
+    font-family: inherit;
     font-weight: bold;
-    transition: opacity 0.3s;
 }
 
-/* Specific Social Button Colors */
-.youtube-btn {
-    background-color: var(--primary-color);
+/* YouTube Logo: Play Button */
+.youtube-btn::before {
+    content: "\25B6"; /* Unicode for Play Button (Triangle) */
 }
 
-.whatsapp-btn {
-    background-color: var(--secondary-color);
+/* WhatsApp Logo: Simple Communication Icon (E.g., Mail or Phone) */
+.whatsapp-btn::before {
+    content: "\2709"; /* Unicode for Envelope/Mail */
+    font-size: 1.2em;
 }
 
-.instagram-btn {
-    background-color: var(--tertiary-color);
+/* Instagram Logo: Camera/Camera Aperture */
+.instagram-btn::before {
+    content: "\1F4F7"; /* Unicode for Camera */
 }
 
 .social-button:hover {
-    opacity: 0.85;
+    opacity: 0.95;
+    transform: scale(1.1); /* Slightly larger pop on hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
 }
+
+.youtube-btn { background-color: var(--youtube-red); }
+.whatsapp-btn { background-color: var(--secondary-color); }
+.instagram-btn { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
 
 /* Footer */
 footer {
     text-align: center;
-    margin-top: 20px;
-    padding-top: 15px;
-    border-top: 1px solid #eee;
-    font-size: 14px;
-    color: #666;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-color);
+    font-size: 0.8em;
+    color: #888;
 }
 
-/* --- Media Queries for Responsiveness --- */
-@media (min-width: 600px) {
+/* --- Success Page Styling --- */
+.success-container {
+    text-align: center;
+    padding: 20px 0;
+    animation: fadeInSlideDown 0.7s ease-out;
+}
+
+.success-icon {
+    font-size: 5rem;
+    line-height: 1;
+    margin-bottom: 15px;
+    color: var(--secondary-color); 
+    animation: iconPop 0.8s ease-out 1 forwards; 
+}
+
+.success-container h2 {
+    color: var(--secondary-color);
+    margin-bottom: 10px;
+    font-size: 1.8em;
+    font-weight: 700;
+}
+
+.success-container p {
+    color: var(--light-text-color);
+    margin-bottom: 25px;
+    font-size: 1.05em;
+}
+
+/* --- Keyframe Animations --- */
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.97);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes fadeInSlideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes iconPop {
+    0% { transform: scale(0); opacity: 0; }
+    80% { transform: scale(1.1); opacity: 1; }
+    100% { transform: scale(1); }
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 600px) {
     .form-wrapper {
-        padding: 40px;
+        padding: 25px;
+        border-radius: 8px;
     }
-    
-    .social-links {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 15px;
+    .header h1 {
+        font-size: 1.5em;
     }
-
-    .social-button {
-        display: inline-block; /* Make buttons inline on larger screens */
-        flex-grow: 1;
-        margin: 0;
-    }
-
     .radio-group {
-        justify-content: space-between;
+        flex-direction: column;
+        gap: 10px;
+    }
+    .social-button {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5em;
+    }
+    .social-icon-group {
+        gap: 10px;
+    }
+    .app-container {
+        padding: 10px;
+        background-size: cover; 
     }
 }
