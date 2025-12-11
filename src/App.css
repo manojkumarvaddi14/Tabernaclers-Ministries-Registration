@@ -1,17 +1,16 @@
 /* Custom CSS Variables */
 :root {
-    --primary-color: #0066cc;        /* Deep Professional Blue */
-    --secondary-color: #25D366;      /* WhatsApp Green */
+    --primary-color: #0066cc;        
+    --secondary-color: #25D366;      
     --youtube-red: #FF0000;
     --instagram-pink: #E1306C;
-    --background-overlay: rgba(18, 18, 18, 0.55); /* Darker overlay for image contrast */
-    --text-color: #1f1f1f;           /* Near black for high contrast text */
+    /* --- LIGHTER/TRANSPARENT OVERLAY for CLEAR BACKGROUND --- */
+    --background-overlay: rgba(18, 18, 18, 0.1); 
+    --text-color: #1f1f1f;           
     --light-text-color: #4a4a4a;
-    /* --- TRANSPARENCY CONTROL --- */
-    --card-background: rgba(255, 255, 255, 0.9); /* White with 10% transparency */
-    /* ----------------------------- */
+    --card-background: rgba(255, 255, 255, 0.95); /* Slightly less transparent for readability */
     --border-color: #dcdcdc;
-    --shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Clean, modern shadow */
+    --shadow: 0 8px 20px rgba(0, 0, 0, 0.1); 
     --transition-speed: 0.3s;
     --font-stack: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
@@ -25,28 +24,25 @@ html, body {
     line-height: 1.5;
 }
 
-/* Background Setup (Cover and Overlay) */
+/* --- SCROLLABLE BACKGROUND LAYOUT --- */
 .app-container {
-    min-height: 100vh;
+    min-height: 100vh; /* Allows scrolling if content is tall */
     display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 40px 20px; 
+    justify-content: center; /* Center the content */
+    align-items: flex-start; /* Align content to the top */
+    padding: 40px 20px; /* Padding restored for separation from edges */
     box-sizing: border-box;
 
-    /* --- BACKGROUND COVER FIX --- */
-    background-size: cover; /* Ensures image covers the entire viewport */
+    background-size: cover; 
     background-position: center;
     background-repeat: no-repeat; 
-    background-attachment: fixed;
-    /* -------------------------- */
-    
+    background-attachment: fixed; /* Keep background fixed while scrolling */
     background-color: #111; 
     position: relative;
-    overflow: hidden; 
+    overflow: auto; /* Allow the page to scroll */
 }
 
-/* Dark Overlay */
+/* Dark Overlay (Blur removed, transparency reduced) */
 .app-container::before {
     content: '';
     position: absolute;
@@ -56,7 +52,23 @@ html, body {
     bottom: 0;
     background-color: var(--background-overlay);
     z-index: 0;
+    /* BLUR EFFECT REMOVED */
+    backdrop-filter: none; 
+    -webkit-backdrop-filter: none; 
 }
+
+/* --- CONTENT FLOW RESTORED --- */
+/* This container is now just for centralizing the form wrapper */
+.content-container {
+    display: block; /* Restore normal flow */
+    width: 100%;
+    max-width: 500px;
+    /* Height and overflow rules removed to allow scrolling */
+    padding: 0; 
+    box-sizing: border-box;
+    z-index: 10;
+}
+/* --- END SCROLLABLE LAYOUT --- */
 
 /* Form Wrapper (Transparent Card Container) */
 .form-wrapper {
@@ -66,14 +78,13 @@ html, body {
     box-shadow: var(--shadow);
     max-width: 480px; 
     width: 100%;
+    margin: 0 auto 30px auto; /* Centered with bottom margin */
     z-index: 10;
-    box-sizing: border-box;
     
-    /* ENHANCED ANIMATION: Fade In and Scale Up */
     animation: fadeInScale 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
 }
 
-/* Header Styling */
+/* Header Styling (Unchanged) */
 .header h1 {
     color: var(--primary-color);
     margin-top: 0;
@@ -90,9 +101,10 @@ html, body {
     font-size: 1.05em;
 }
 
-/* Form Groups */
+/* Form Groups (Unchanged) */
 .form-group {
     margin-bottom: 22px; 
+    width: 100%; 
 }
 
 .form-group label {
@@ -114,14 +126,14 @@ html, body {
     font-size: 1em;
 }
 
-/* Input Focus Feedback */
+/* Input Focus Feedback (Unchanged) */
 .form-group input:focus {
     border-color: var(--primary-color);
     box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.15); 
     outline: none;
 }
 
-/* Radio Group Styling */
+/* Radio Group Styling (Unchanged) */
 .radio-group {
     display: flex;
     flex-wrap: wrap;
@@ -137,17 +149,11 @@ html, body {
     color: var(--light-text-color);
 }
 
-.radio-group input[type="radio"] {
-    margin-right: 8px;
-    transform: scale(1.0);
-    transition: transform 0.2s ease;
-}
-
 .radio-group input[type="radio"]:checked {
     transform: scale(1.25); 
 }
 
-/* Buttons */
+/* Buttons (Unchanged) */
 .submit-button {
     width: 100%;
     padding: 14px;
@@ -168,7 +174,7 @@ html, body {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-/* Submission Message */
+/* Submission Message (Unchanged) */
 .message {
     text-align: center;
     margin-top: 20px;
@@ -176,94 +182,82 @@ html, body {
     font-weight: 600;
 }
 
-/* Social Links Section */
+/* Social Links Section (Restored to flow with content) */
 .social-links {
-    margin-top: 35px;
-    padding-top: 25px;
-    border-top: 1px solid var(--border-color);
+    padding: 25px 0; /* Padding increased */
     text-align: center;
+    width: 100%;
+    /* Background removed from social links, relies on form/app background */
+    background-color: transparent; 
+    border-top: 1px solid var(--border-color);
+    box-shadow: none; /* Shadow removed */
+    z-index: 10; 
 }
 
 .social-links h2 {
-    font-size: 1.4em;
-    color: var(--light-text-color);
+    font-size: 1.4em; 
+    color: white; /* Changed to white for contrast on the dark background */
     margin-bottom: 20px;
     font-weight: 600;
+    text-shadow: 0 0 3px rgba(0, 0, 0, 0.8); /* Added subtle shadow for legibility */
 }
 
-/* --- LOGO STYLING OVERRIDES --- */
-
-/* Parent container for horizontal arrangement */
 .social-icon-group {
     display: flex;
     justify-content: center;
-    gap: 15px; /* Spacing between logos */
-    margin-bottom: 20px; /* Space below the logos */
+    gap: 15px; 
+    margin-bottom: 0; 
     flex-wrap: wrap;
 }
 
 .social-button {
-    /* Set fixed size for the logo button */
     display: inline-flex; 
     justify-content: center;
     align-items: center;
     width: 60px; 
     height: 60px;
-    
-    border-radius: 50%; /* Make them circular */
-    
+    border-radius: 50%; 
     color: white;
-    text-decoration: none;
     font-weight: 600;
-    transition: opacity var(--transition-speed) ease, transform 0.2s ease;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    font-size: 1.8em; /* Size of the icon text/character */
+    transition: transform 0.2s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); /* Darker shadow for contrast */
+    font-size: 1.8em; 
 }
 
-/* Logo Pseudo-element Content (Using Unicode Characters as Logos) */
+/* Logo Pseudo-element Content (Unchanged) */
 .social-button::before {
     content: ''; 
     font-family: inherit;
     font-weight: bold;
 }
 
-/* YouTube Logo: Play Button */
-.youtube-btn::before {
-    content: "\25B6"; /* Unicode for Play Button (Triangle) */
-}
-
-/* WhatsApp Logo: Simple Communication Icon (E.g., Mail or Phone) */
-.whatsapp-btn::before {
-    content: "\2709"; /* Unicode for Envelope/Mail */
-    font-size: 1.2em;
-}
-
-/* Instagram Logo: Camera/Camera Aperture */
-.instagram-btn::before {
-    content: "\1F4F7"; /* Unicode for Camera */
-}
+.youtube-btn::before { content: "\25B6"; }
+.whatsapp-btn::before { content: "\2709"; font-size: 1.2em; }
+.instagram-btn::before { content: "\1F4F7"; }
 
 .social-button:hover {
     opacity: 0.95;
-    transform: scale(1.1); /* Slightly larger pop on hover */
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+    transform: scale(1.1); 
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
 }
 
 .youtube-btn { background-color: var(--youtube-red); }
 .whatsapp-btn { background-color: var(--secondary-color); }
 .instagram-btn { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
 
-/* Footer */
+/* Global Copyright Footer (Restored to flow with content) */
 footer {
     text-align: center;
-    margin-top: 30px;
-    padding-top: 20px;
-    border-top: 1px solid var(--border-color);
-    font-size: 0.8em;
-    color: #888;
+    padding: 20px 0 40px 0; /* Increased bottom padding */
+    font-size: 0.9em;
+    color: white; 
+    width: 100%;
+    z-index: 10;
+    background-color: transparent; /* Removed dark footer background */
+    text-shadow: 0 0 3px rgba(0, 0, 0, 0.8);
 }
 
-/* --- Success Page Styling --- */
+/* --- Success Page Styling (Unchanged) --- */
 .success-container {
     text-align: center;
     padding: 20px 0;
@@ -291,7 +285,7 @@ footer {
     font-size: 1.05em;
 }
 
-/* --- Keyframe Animations --- */
+/* --- Keyframe Animations (Unchanged) --- */
 @keyframes fadeInScale {
     from {
         opacity: 0;
@@ -320,29 +314,21 @@ footer {
     100% { transform: scale(1); }
 }
 
-/* Mobile Responsiveness */
+/* Mobile Responsiveness (Adjusted padding) */
 @media (max-width: 600px) {
+    .app-container {
+        padding: 20px 10px;
+    }
     .form-wrapper {
-        padding: 25px;
-        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
     }
     .header h1 {
         font-size: 1.5em;
-    }
-    .radio-group {
-        flex-direction: column;
-        gap: 10px;
     }
     .social-button {
         width: 50px;
         height: 50px;
         font-size: 1.5em;
-    }
-    .social-icon-group {
-        gap: 10px;
-    }
-    .app-container {
-        padding: 10px;
-        background-size: cover; 
     }
 }
