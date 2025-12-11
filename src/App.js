@@ -1,18 +1,19 @@
 import { useState } from 'react';
 import './App.css';
 
-// === IMPORTANT: REPLACE THESE WITH YOUR GOOGLE FORM VALUES ===
-const GOOGLE_FORM_ACTION_URL = "https://docs.google.com/forms/d/1umZW3z3z9k9l6GltP6Z_tLHivmOOAweNSzHPsvPWsX0/"; // e.g., https://docs.google.com/forms/d/e/1FAIpQLScz.../formResponse
+// === FINAL GOOGLE FORM CONFIGURATION ===
+// Submission URL derived from the embedded link you provided
+const GOOGLE_FORM_ACTION_URL = "https://docs.google.com/forms/d/e/1FAIpQLSefMxMst5_WBdwvixPOtrbWPTIWdOF9GMy0kk11kQsLXg-_Bw/formResponse";
 
-// Map your form fields to the Google Form's entry IDs
+// Mapped form fields to the Google Form's entry IDs provided by you
 const FIELD_IDS = {
-    NAME: "entry.2112083089",          // Replace with your Name ID
-    PHONE: "entry.191136437",         // Replace with your Phone ID
-    LOCATION: "entry.398155023",      // Replace with your Location ID
-    INVITED_THROUGH: "entry.1465180738",// Replace with your Invited Through ID
-    REFERENCED_BY: "entry.511397093",  // Replace with your Referenced By ID
+    NAME: "entry.2112083089",          
+    PHONE: "entry.191136437",         
+    LOCATION: "entry.398155023",      
+    INVITED_THROUGH: "entry.1465180738",
+    REFERENCED_BY: "entry.511397093",  
 };
-// =============================================================
+// =======================================
 
 const App = () => {
     const [formData, setFormData] = useState({
@@ -26,15 +27,11 @@ const App = () => {
     const [showReferenceInput, setShowReferenceInput] = useState(false);
     const [message, setMessage] = useState('');
 
+    // Background Image URL
     const BACKGROUND_IMAGE_URL = "https://www.dropbox.com/scl/fi/tndurdxpo6apiaoe0geb3/IMG-20251203-WA0009.jpg?rlkey=7pfkaewheleta8c9q283beeog&e=1&st=okrzqclv&dl=1";
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        // Basic input validation moved here for clarity
-        if (name === 'phone' && value.length > 10) return;
-        if (name === 'location' && value.length > 10) return;
-        if (name === 'referenceText' && value.length > 15) return;
-
         setFormData({ ...formData, [name]: value });
     };
 
@@ -54,7 +51,7 @@ const App = () => {
         e.preventDefault();
         setMessage('Submitting...');
         
-        // 1. Determine final referencedBy value
+        // 1. Determine final referencedBy value (use the 15-char text if 'Other' is checked)
         const finalReferencedBy = formData.referencedBy === 'Other' 
                                   ? formData.referenceText 
                                   : formData.referencedBy;
@@ -69,19 +66,16 @@ const App = () => {
         
         try {
             // 3. Submit the data using POST request
-            const response = await fetch(GOOGLE_FORM_ACTION_URL, {
+            await fetch(GOOGLE_FORM_ACTION_URL, {
                 method: 'POST',
-                // Important: Google Forms submission requires this Content-Type
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
                 },
                 body: data,
-                // Mode is set to 'no-cors' because Google Forms is an external endpoint
-                mode: 'no-cors', 
+                mode: 'no-cors', // Essential for submitting data to external endpoint like Google Forms
             });
 
-            // Note: Since mode is 'no-cors', response.ok or response.status check is unreliable.
-            // A successful fetch typically means the data was sent.
+            // If fetch succeeds, we assume data was sent (due to 'no-cors')
             setMessage('Registration successful! Data saved to Google Sheet.');
             setFormData({ // Reset form
                 name: '', phone: '', location: '', invitedThrough: 'Instagram', referencedBy: '', referenceText: '',
@@ -89,7 +83,6 @@ const App = () => {
             setShowReferenceInput(false);
             
         } catch (error) {
-            // This usually catches network failures, not Google Form errors
             setMessage('Network error. Could not submit the form.');
         }
     };
